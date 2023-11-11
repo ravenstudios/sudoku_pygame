@@ -1,13 +1,8 @@
 from constants import *
 import pygame
-import square
+import board_manager
 
-grid = []
-for r in range(ROWS):
-    row = []
-    for c in range(COLS):
-        row.append(square.Square(r, c))
-    grid.append(row)
+board_manager = board_manager.Board_manager()
 
 
 
@@ -25,9 +20,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:  #Better to seperate to a new if statement aswell, since there's more buttons that can be clicked and makes for cleaner code.
                 if event.button == 1:
-                    for gr in grid:
-                        for gc in gr:
-                            gc.clicked()
+                    board_manager.clicked()
             if event.type == pygame.QUIT:
                 running = False
 
@@ -46,21 +39,18 @@ def main():
 
 def draw():
     surface.fill((0, 0, 0))#background
-    for gr in grid:
-        for gc in gr:
-            gc.draw(surface)
+    board_manager.draw(surface)
     pygame.draw.line(surface, RED, (0, 3 * BLOCK_SIZE), (GAME_WIDTH, 3 * BLOCK_SIZE), width=3)
     pygame.draw.line(surface, RED, (0, 6 * BLOCK_SIZE), (GAME_WIDTH, 6 * BLOCK_SIZE), width=3)
     pygame.draw.line(surface, RED, (3 * BLOCK_SIZE, 0), (3 * BLOCK_SIZE, GAME_HEIGHT), width=3)
     pygame.draw.line(surface, RED, (6 * BLOCK_SIZE, 0), (6 * BLOCK_SIZE, GAME_HEIGHT), width=3)
+
     pygame.display.flip()
 
 
 
 def update():
-    for gr in grid:
-        for gc in gr:
-            gc.update()
+    board_manager.update()
 
 
 

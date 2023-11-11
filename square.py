@@ -1,12 +1,15 @@
 from constants import *
 import pygame
-
+import random
 
 class Square:
     def __init__(self, row, col):
         self.row = row
         self.col = col
-        self.value = 0
+        if random.randint(0,1) == 0:
+            self.value = random.randint(1, 9)
+        else:
+            self.value = 0
         self.size = BLOCK_SIZE
         self.rect = pygame.Rect(0, 0, self.size, self.size)
         self.rect.topleft = row * BLOCK_SIZE, col * BLOCK_SIZE
@@ -16,11 +19,7 @@ class Square:
         self.selected_background_color = (200, 200, 200)
         self.color = WHITE
 
-    @classmethod
-    def unselect_all(self):
-        print("unselected")
-        self.can_edit = False
-        self.color = (255, 0, 255)
+
 
 
     def change_number(self, number):
@@ -32,6 +31,7 @@ class Square:
         return self.value
 
     def clicked(self):
+
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             if self.can_edit:
                 self.color = self.background_color
