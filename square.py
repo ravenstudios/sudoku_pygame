@@ -16,7 +16,7 @@ class Square:
         self.selected_background_color = (200, 200, 200)
         self.color = WHITE
 
-    @staticmethod
+    @classmethod
     def unselect_all(self):
         print("unselected")
         self.can_edit = False
@@ -28,15 +28,21 @@ class Square:
         self.can_edit = False
         self.color = self.background_color
 
+    def get_value(self):
+        return self.value
+
     def clicked(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
-            Square.unselect_all(self)
             if self.can_edit:
                 self.color = self.background_color
                 self.can_edit = False
             else:
                 self.color = self.selected_background_color
                 self.can_edit = True
+        else:
+            if self.can_edit:
+                self.can_edit = False
+                self.color = self.background_color
 
 
     def update(self):
