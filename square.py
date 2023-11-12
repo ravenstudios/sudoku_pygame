@@ -3,16 +3,18 @@ import pygame
 import random
 
 class Square:
-    def __init__(self, row, col):
+    def __init__(self, col, row, count):
         self.row = row
         self.col = col
-        if random.randint(0,1) == 0:
-            self.value = random.randint(1, 9)
-        else:
-            self.value = 0
+        # if random.randint(0,1) == 0:
+        #     self.value = random.randint(1, 9)
+        # else:
+            # self.value = count
+        self.value = count
+
         self.size = BLOCK_SIZE
         self.rect = pygame.Rect(0, 0, self.size, self.size)
-        self.rect.topleft = row * BLOCK_SIZE, col * BLOCK_SIZE
+        self.rect.topleft = col * BLOCK_SIZE, row * BLOCK_SIZE
         self.border_offset = 3
         self.can_edit = False
         self.background_color = WHITE
@@ -67,7 +69,7 @@ class Square:
             if keys[pygame.K_9]:
                 self.change_number(9)
             if keys[pygame.K_0]:
-                self.change_number(0)
+                self.change_number("")
 
     def draw(self, surface):
         pygame.draw.rect(surface, (0, 0, 0), self.rect)
