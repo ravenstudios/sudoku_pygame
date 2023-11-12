@@ -1,18 +1,60 @@
 import square
 from constants import *
 import pygame
+import random
+import solver
 
 
 class Board_manager:
     def __init__(self):
-        self.grid = []
-        count = 0
+        self.grid = self.make_board(True)
+
+
+        self.solver = solver.Solver()
+        solved = self.solver.is_board_full(self.grid)
+
+
+
+    def make_board(self, fill=False):
+        grid = []
         for r in range(ROWS):
             row = []
+            count = 1
             for c in range(COLS):
-                row.append(square.Square(c, r, count))
+                s = square.Square(c, r)
+                if fill:
+                    s.value = count
+                row.append(s)
                 count += 1
-            self.grid.append(row)
+            grid.append(row)
+        return grid
+
+        # done = False
+        # count = 0
+        # while not done:
+        #     for r in range(ROWS):
+        #         for c in range(COLS):
+        #             cell = self.grid[r][c]
+        #
+        #             x = random.randint(1, 9)
+        #             if not self.check_row(r, c, x):
+        #                 if not self.check_col(r, c, x):
+        #                     if not self.check_box(r, c, x):
+        #                         self.grid[r][c].value = x
+        #                         count += 1
+        #             print(count)
+        #             if count == 9 * 9 -1:
+        #                 done = True
+
+
+
+
+
+
+
+
+
+
 
         # for r in range(len(self.grid)):
         #     for c in range(len(self.grid[r])):
@@ -37,49 +79,3 @@ class Board_manager:
         # self.check_row(self.row, self.col, value)
         # self.check_col(self.row, self.col, value)
         self.check_box(self.row, self.col, value)
-
-
-    def check_row(self, row, col, value):
-        print(f"value: {col}")
-
-        r = self.grid[row].copy()
-        x = self.grid[row][col]
-        print(f"row:{x.row}, col:{x.col}, value:{x.value}")
-        r.remove(x)
-        nums = []
-        for i in r:
-            nums.append(i.value)
-        print(nums)
-        print(value in nums)
-
-
-    def check_col(self, row, col, value):
-        nums = []
-        col_arr = []
-        for i in range(len(self.grid)):
-            col_arr.append(self.grid[i][col])
-        x = self.grid[row][col]
-        col_arr.remove(x)
-        for c in col_arr:
-            nums.append(c.value)
-
-        print(nums)
-
-
-    def check_box(self, row, col, value):
-        box_arr = []
-        nums = []
-        row_start = row // 3 * 3
-        col_start = col // 3 * 3
-        print(f"row:{row}, col:{col}")
-        for i in range(3):
-            box_arr.append(self.grid[row_start][col_start + i])
-            box_arr.append(self.grid[row_start + 1][col_start + i])
-            box_arr.append(self.grid[row_start + 2][col_start + i])
-        x = self.grid[row][col]
-        print(f"row:{x.row}, col:{x.col}, value:{x.value}")
-        box_arr.remove(x)
-        for b in box_arr:
-            nums.append(b.value)
-        print(nums)
-        print(value in nums)

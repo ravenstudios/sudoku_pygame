@@ -3,14 +3,14 @@ import pygame
 import random
 
 class Square:
-    def __init__(self, col, row, count):
+    def __init__(self, col, row):
         self.row = row
         self.col = col
         # if random.randint(0,1) == 0:
         #     self.value = random.randint(1, 9)
         # else:
-            # self.value = count
-        self.value = count
+        #     self.value = ""
+        self.value = ""
 
         self.size = BLOCK_SIZE
         self.rect = pygame.Rect(0, 0, self.size, self.size)
