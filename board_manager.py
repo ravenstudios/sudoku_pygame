@@ -35,8 +35,8 @@ class Board_manager:
         self.grid[self.row][self.col].clicked()
         value = self.grid[self.row][self.col].get_value()
         # self.check_row(self.row, self.col, value)
-        self.check_col(self.row, self.col, value)
-
+        # self.check_col(self.row, self.col, value)
+        self.check_box(self.row, self.col, value)
 
 
     def check_row(self, row, col, value):
@@ -66,5 +66,20 @@ class Board_manager:
         print(nums)
 
 
-    def check_box(self):
-        pass
+    def check_box(self, row, col, value):
+        box_arr = []
+        nums = []
+        row_start = row // 3 * 3
+        col_start = col // 3 * 3
+        print(f"row:{row}, col:{col}")
+        for i in range(3):
+            box_arr.append(self.grid[row_start][col_start + i])
+            box_arr.append(self.grid[row_start + 1][col_start + i])
+            box_arr.append(self.grid[row_start + 2][col_start + i])
+        x = self.grid[row][col]
+        print(f"row:{x.row}, col:{x.col}, value:{x.value}")
+        box_arr.remove(x)
+        for b in box_arr:
+            nums.append(b.value)
+        print(nums)
+        print(value in nums)
