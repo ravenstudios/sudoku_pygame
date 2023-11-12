@@ -46,7 +46,6 @@ class Solver:
         nums = []
         for i in r:
             nums.append(i.value)
-        print(f"value:{value} nums:{nums}")
         return value in nums
 
 
@@ -60,6 +59,7 @@ class Solver:
         col_arr.remove(x)
         for c in col_arr:
             nums.append(c.value)
+        print(f"nums:{nums}")
         return value in nums
 
 

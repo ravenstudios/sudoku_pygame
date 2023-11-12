@@ -35,9 +35,16 @@ class TestSolver(unittest.TestCase):
 
 
     def test_check_row(self):
-
         self.assertEqual(self.solver.check_row(self.grid, 0, 0, 0), False, "True should = False")
         self.assertEqual(self.solver.check_row(self.grid, 0, 1, 1), True, "False should = True")
+
+    def test_check_col(self):
+        self.assertEqual(self.solver.check_col(self.grid, 0, 0, 0), False, "True should = False")
+        self.assertEqual(self.solver.check_col(self.grid, 0, 1, 2), True, "False should = True")
+
+    def test_check_box(self):
+        self.assertEqual(self.solver.check_box(self.grid, 0, 0, 0), False, "True should = False")
+        self.assertEqual(self.solver.check_box(self.grid, 0, 1, 2), True, "False should = True")
 
 
 
